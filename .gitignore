@@ -2,3 +2,4 @@
 *.tar.xz
 *.tar.xz.sig
 *.tar.zst
+!xcursor-neutral++-white-1.1.1.tar.xz
