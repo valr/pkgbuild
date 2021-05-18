@@ -1,0 +1,70 @@
+pkgname=deadbeef
+pkgver=1.8.7
+pkgrel=1
+pkgdesc='A modular audio player for GNU/Linux, *BSD, OpenSolaris, macOS, and other UNIX-like systems'
+arch=('x86_64')
+url='https://deadbeef.sourceforge.io/'
+license=('GPL2' 'LGPL2.1' 'ZLIB')
+depends=('alsa-lib' 'hicolor-icon-theme' 'jansson' 'libdispatch')
+makedepends=('curl' 'faad2' 'flac' 'git' 'intltool' 'imlib2' 'libcddb' 'libcdio' 'libmad' 'libpulse'
+             'libsamplerate' 'libvorbis' 'libx11' 'libzip' 'wavpack' 'yasm'
+             'ffmpeg' 'gtk2' 'gtk3' 'clang')
+optdepends=('gtk2: for the GTK2 interface'
+            'gtk3: for the GTK3 interface'
+            'libsamplerate: for dsp_libsrc plugin (resampler)'
+            'libsm: optional dependency for gtkui session client support'
+            'libice: optional dependency for gtkui session client support'
+            'alsa-lib: ALSA support'
+            'alsa-oss: for OSS output plugin'
+            'libvorbis: for ogg vorbis plugin'
+            'libogg: for ogg vorbis plugin'
+            'libmad: for mp3 plugin (mpeg1,2 layers1,2,3)'
+            'flac: for flac plugin'
+            'curl: for last.fm, vfs_curl (shoutcast/icecast), artwork plugins'
+            'imlib2: for artwork plugin'
+            'wavpack: for wavpack plugin'
+            'libsndfile: for sndfile plugin'
+            'libcdio: for cd audio plugin'
+            'libcddb: for cd audio plugin'
+            'cdparanoia: for cd audio plugin'
+            'faad2: for AAC plugin'
+            'dbus: for notification daemon support (OSD current song notifications)'
+            'pulseaudio: for PulseAudio output plugin'
+            'libx11: for global hotkeys plugin'
+            'zlib: for Audio Overload plugin (psf, psf2, etc), GME (for vgz)'
+            'libsidplay: for SID player plugin'
+            'yasm: required to build assembly portions of ffap plugin'
+            'libzip: for vfs_zip plugin'
+            'ffmpeg: for ffmpeg plugin'
+            'opusfile: for opus plugin'
+            'mpg123: for MP1/MP2/MP3 playback')
+
+_apbuildcommit=c64f490e54447e3902fae54784d01ab59fa7dc95
+_mp4pcommit=91e6ead5823dafcb238edb37a7256edac41339a1
+source=("https://github.com/DeaDBeeF-Player/${pkgname}/archive/${pkgver}.tar.gz"
+        "apbuild-${pkgver}-${_apbuildcommit}.tar.gz::https://github.com/DeaDBeeF-Player/apbuild/archive/${_apbuildcommit}.tar.gz"
+        "mp4p-${pkgver}-${_mp4pcommit}.tar.gz::https://github.com/DeaDBeeF-Player/mp4p/archive/${_mp4pcommit}.tar.gz")
+sha512sums=('b8026b934a211ed24cdbc7e738fbfaa95d20706c0fcaef65530d7354e19d71c1e05af59305354478b4c4f1dbe4f7dbf436af7093d25727a2508b24c692a09258'
+            '33b293a5b494ecfb50a48a37aca95de054125e2e864d197bd374bd1477bfcf1a8f5bc924303a7a846c1971c6503dbf0e82e74ff6db605a7720736a5696acdeda'
+            'da7fe837cab66a357a671b12236e826b1e5f63967ed79a8b34609bf4d34badec41d4e82e5b181bf9923533eb085f6198caac201b2f6e81f6a26e464afef38f75')
+
+prepare() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+
+    rmdir external/{apbuild,mp4p}
+    ln -s "${srcdir}"/apbuild-$_apbuildcommit external/apbuild
+    ln -s "${srcdir}"/mp4p-$_mp4pcommit external/mp4p
+
+    ./autogen.sh
+}
+
+build () {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    CC=clang CXX=clang++ ./configure --prefix=/usr
+    make
+}
+
+package() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="$pkgdir" install
+}

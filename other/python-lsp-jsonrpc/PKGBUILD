@@ -1,0 +1,38 @@
+# Maintainer: <archlinux@vale.re>
+
+pkgname=python-lsp-jsonrpc
+pkgver=1.0.0
+pkgrel=1
+pkgdesc='An implementation of the JSON RPC 2.0 protocol for Python'
+arch=(any)
+url='https://github.com/python-lsp/python-lsp-jsonrpc'
+license=(MIT)
+depends=(python python-ujson)
+makedepends=(python-setuptools)
+checkdepends=(python-pylint python-pycodestyle python-pyflakes python-pytest
+              python-pytest-cov python-coverage)
+source=("https://github.com/python-lsp/python-lsp-jsonrpc/archive/refs/tags/v${pkgver}.tar.gz"
+        "fix-test.patch")
+sha256sums=('058f21fa9e5c49fbb978c3f92c4b0ed84f3a859dc6568632cb69ddec2bcb38c0'
+            '7f6dcef7052f666bafccaa2d43c037a511aaad8ee289fb65130eae809cf88072')
+
+prepare(){
+    cd ${pkgname}-${pkgver}
+    patch -p1 -i ../fix-test.patch
+}
+
+build() {
+    cd ${pkgname}-${pkgver}
+    python setup.py build
+}
+
+check() {
+    cd ${pkgname}-${pkgver}
+    py.test
+}
+
+package() {
+    cd ${pkgname}-${pkgver}
+    python setup.py install --root="${pkgdir}" --optimize=1 --skip-build
+    install -Dm644 LICENSE "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
+}

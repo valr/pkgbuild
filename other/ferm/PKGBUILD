@@ -1,0 +1,28 @@
+# Maintainer: Sébastien Luttringer
+# Contributor: Marti Raudsepp <marti@juffo.org>
+# Contributor: Manuel Mazzuola <origin.of@gmail.com>
+
+pkgname=ferm
+pkgver=2.6
+pkgrel=1
+pkgdesc='Tool to maintain complex firewalls'
+arch=(any)
+url='http://ferm.foo-projects.org/'
+license=(GPL2)
+depends=(iptables perl)
+optdepends=(ebtables arptables ipset)
+backup=("etc/$pkgname.conf")
+validpgpkeys=('0392335A78083894A4301C43236E8A58C6DB4512') # Max Kellermann <max@blarg.de>
+source=("http://ferm.foo-projects.org/download/${pkgver:0:3}/$pkgname-$pkgver.tar.xz"{,.sig})
+sha512sums=('af2bb852630304a86629c2ce3af8f557d17f59c704589ea130d8578f300a606e4fedbd39c88f89646df974947fc27982e3ea21de1187257afc74a6056fdf666c'
+            'SKIP')
+
+package() {
+    cd $pkgname-$pkgver
+    make PREFIX="$pkgdir"/usr install
+
+    cd "$pkgdir"
+    install -D -m 644 usr/share/doc/ferm/examples/workstation.ferm etc/$pkgname.conf
+    mv usr/sbin usr/bin
+    rm usr/share/doc/ferm/ferm.{html,txt}
+}
