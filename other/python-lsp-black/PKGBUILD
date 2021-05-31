@@ -1,0 +1,24 @@
+# Maintainer: <archlinux@vale.re>
+
+pkgname=python-lsp-black
+pkgver=1.0.0
+pkgrel=1
+pkgdesc='Black plugin for python-lsp-server'
+arch=(any)
+url='https://github.com/python-lsp/python-lsp-black'
+license=(MIT)
+depends=(python python-lsp-server python-black)
+makedepends=(python-setuptools)
+source=("https://github.com/python-lsp/python-lsp-black/archive/refs/tags/v${pkgver}.tar.gz")
+sha256sums=('76e23e09e342b572c94b42a9d8c3cf10c3a1b1aed9969bd6817cb085e214432e')
+
+build() {
+    cd ${pkgname}-${pkgver}
+    python setup.py build
+}
+
+package() {
+    cd ${pkgname}-${pkgver}
+    python setup.py install --root="${pkgdir}" --optimize=1 --skip-build
+    install -Dm644 LICENSE "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
+}
