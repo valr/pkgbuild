@@ -1,0 +1,25 @@
+# Maintainer: <archlinux@vale.re>
+
+pkgname=python-lsp-isort
+_pkgname=pyls-isort
+pkgver=0.2.2
+pkgrel=1
+pkgdesc='Isort plugin for python-lsp-server'
+arch=(any)
+url='https://github.com/paradoxxxzero/pyls-isort'
+license=(MIT)
+depends=(python python-lsp-server python-isort)
+makedepends=(python-setuptools)
+source=("https://github.com/paradoxxxzero/pyls-isort/archive/refs/tags/v${pkgver}.tar.gz")
+sha256sums=('1f0a77d718a8ffdff2120a145b8e4e3f3a0c02eb58222657feed6815db6c7e01')
+
+build() {
+    cd ${_pkgname}-${pkgver}
+    python setup.py build
+}
+
+package() {
+    cd ${_pkgname}-${pkgver}
+    python setup.py install --root="${pkgdir}" --optimize=1 --skip-build
+    install -Dm644 LICENSE "${pkgdir}"/usr/share/licenses/${_pkgname}/LICENSE
+}
