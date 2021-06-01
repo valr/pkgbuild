@@ -7,18 +7,20 @@ pkgdesc='An implementation of the Language Server Protocol for Python'
 arch=(any)
 url='https://github.com/python-lsp/python-lsp-server'
 license=(MIT)
-depends=('python>=3.6' 'python-jedi>=0.17.2' 'python-jedi<0.19.0' 'python-lsp-jsonrpc>=1.0.0' 'python-pluggy' 'python-ujson>=3.0.0')
+depends=('python>=3.6' 'python-jedi>=0.17.2' 'python-jedi<0.19.0'
+         'python-lsp-jsonrpc>=1.0.0' 'python-pluggy' 'python-ujson>=3.0.0')
 makedepends=('python-setuptools>=39.0.0')
-optdepends=('autopep8: for code formatting'
-            'flake8: for code linting'
-            'python-lsp-black: for code formatting'
-            'python-mccabe: for complexity checking'
+optdepends=('python-mccabe: for complexity checking'
             'python-pycodestyle: for style checking'
             'python-pydocstyle: for docstring style checking'
             'python-pyflakes: for linter to detect various errors'
             'python-pylint: for code linting'
+            'flake8: for code linting'
             'python-rope: for completions and renaming'
-            'yapf: for code formatting')
+            'autopep8: for code formatting'
+            'yapf: for code formatting'
+            'python-lsp-black: for code formatting'
+            'python-lsp-isort: to sort imports')
 checkdepends=(autopep8 flake8 python-mccabe python-pycodestyle python-pydocstyle
               python-pyflakes python-pylint python-rope yapf
               python-pytest python-pytest-cov python-coverage python-numpy
