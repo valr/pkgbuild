@@ -1,8 +1,8 @@
 # Maintainer: Valère Monseur <archlinux at vale dot re>
 
 pkgname=deadbeef
-pkgver=1.8.7
-pkgrel=1
+pkgver=1.8.8
+pkgrel=2
 pkgdesc='A modular audio player for GNU/Linux, *BSD, OpenSolaris, macOS, and other UNIX-like systems'
 arch=('x86_64')
 url='https://deadbeef.sourceforge.io/'
@@ -46,7 +46,7 @@ _mp4pcommit=91e6ead5823dafcb238edb37a7256edac41339a1
 source=("https://github.com/DeaDBeeF-Player/${pkgname}/archive/${pkgver}.tar.gz"
         "apbuild-${pkgver}-${_apbuildcommit}.tar.gz::https://github.com/DeaDBeeF-Player/apbuild/archive/${_apbuildcommit}.tar.gz"
         "mp4p-${pkgver}-${_mp4pcommit}.tar.gz::https://github.com/DeaDBeeF-Player/mp4p/archive/${_mp4pcommit}.tar.gz")
-sha512sums=('b8026b934a211ed24cdbc7e738fbfaa95d20706c0fcaef65530d7354e19d71c1e05af59305354478b4c4f1dbe4f7dbf436af7093d25727a2508b24c692a09258'
+sha512sums=('4c43dbb0872cd9c101064cdc871e4ae87bab02024e9f7b2b866e418682d4989c8f2bed54f816833d7cbedcf59b1db28740d6fdcfd6e6c1a4ae95159845448200'
             '33b293a5b494ecfb50a48a37aca95de054125e2e864d197bd374bd1477bfcf1a8f5bc924303a7a846c1971c6503dbf0e82e74ff6db605a7720736a5696acdeda'
             'da7fe837cab66a357a671b12236e826b1e5f63967ed79a8b34609bf4d34badec41d4e82e5b181bf9923533eb085f6198caac201b2f6e81f6a26e464afef38f75')
 
