@@ -1,3 +1,5 @@
+# Maintainer: Valère Monseur <archlinux at vale dot re>
+
 pkgname=deadbeef
 pkgver=1.8.7
 pkgrel=1

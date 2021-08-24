@@ -1,4 +1,4 @@
-# Maintainer: archlinux at vale dot re
+# Maintainer: Valère Monseur <archlinux at vale dot re>
 
 pkgname=xcursor-neutral++-white
 pkgver=1.1.1
