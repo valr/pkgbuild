@@ -2,7 +2,7 @@
 
 pkgname=deadbeef
 pkgver=1.8.8
-pkgrel=2
+pkgrel=3
 pkgdesc='A modular audio player for GNU/Linux, *BSD, OpenSolaris, macOS, and other UNIX-like systems'
 arch=('x86_64')
 url='https://deadbeef.sourceforge.io/'
